@@ -35,6 +35,17 @@ async def main():
     request = device.set()
     args = {}
 
+    if len(sys.argv) == 1:
+        print("""brightness: {brightness}%
+temperature: {color_temp}
+hue: {hue}
+saturation: {saturation}%""".format(**info.to_dict()))
+        if info.color_temp:
+            print(f"b={info.brightness} t={info.color_temp}")
+        else:
+            print(f"b={info.brightness} h={info.hue} s={info.saturation}")
+        return
+
     for arg in sys.argv[1:]:
         key, delim, value = re.match(r"([a-z]+)([=+-])([0-9]+)", arg).groups()
         value = int(value)
@@ -42,9 +53,9 @@ async def main():
 
         match delim:
             case "+":
-                value = getattr(info, key) + value
+                value = getattr(info, key if key != "temperature" else "color_temp") + value
             case "-":
-                value = getattr(info, key) - value
+                value = getattr(info, key if key != "temperature" else "color_temp") - value
 
         match key:
             case "brightness":
