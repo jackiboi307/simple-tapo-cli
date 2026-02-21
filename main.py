@@ -62,9 +62,6 @@ async def main():
                 value = value % 361
             case "saturation":
                 value = clamp(1, 100, value)
-            case _:
-                print("error: unexpected key '{key}'")
-                sys.exit(1)
 
         args[key] = value
 
