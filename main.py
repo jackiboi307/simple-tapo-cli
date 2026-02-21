@@ -36,14 +36,10 @@ async def main():
     args = {}
 
     if len(sys.argv) == 1:
-        print("""brightness: {brightness}%
-temperature: {color_temp}
-hue: {hue}
-saturation: {saturation}%""".format(**info.to_dict()))
         if info.color_temp:
-            print(f"b={info.brightness} t={info.color_temp}")
+            print(f"brightness={info.brightness} temperature={info.color_temp}")
         else:
-            print(f"b={info.brightness} h={info.hue} s={info.saturation}")
+            print(f"brightness={info.brightness} hue={info.hue} saturation={info.saturation}")
         return
 
     for arg in sys.argv[1:]:
