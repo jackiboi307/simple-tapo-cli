@@ -8,8 +8,13 @@ Expected ranges: 0-100 for brightness, 0-360 for hue, 1-100 for saturation, and 
 
 ```bash
 $ tapo b=0  # keys can be shortened ('br', 'bright' etc. are also valid)
-$ tapo hue=0 sat=100
+$ tapo b=90 hue=0 sat=100
 $ tapo hue+10
 $ tapo hue-10
 $ tapo temp=3000  # a warm white
+$ tapo  # print info
+brightness=90 temperature=300  # can be used as args
+$ tapo hue=0
+$ tapo
+brightness=90 hue=0 saturation=100
 ```
