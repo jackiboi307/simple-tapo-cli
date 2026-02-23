@@ -14,7 +14,7 @@ $ tapo hue-10
 $ tapo temp=3000  # a warm white
 $ tapo  # print info
 brightness=90 temperature=300  # can be used as args
-$ tapo hue=0
+$ tapo hue=red  # some color names are supported as hue values
 $ tapo
 brightness=90 hue=0 saturation=100
 ```

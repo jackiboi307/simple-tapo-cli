@@ -6,17 +6,27 @@ import re
 from tapo import ApiClient
 from tapo.requests import Color
 
+HUES = {
+    "red": 0,
+    "orange": 30,
+    "yellow": 60,
+    "green": 120,
+    "cyan": 180,
+    "blue": 240,
+    "magenta": 270,
+}
+
 def clamp(min_, max_, value):
     return min(max_, max(min_, value))
 
-def best_match(prefix, targets):
+def best_match(prefix, targets, what):
     # ai generated
     matches = [target for target in targets if target.startswith(prefix)]
     if matches:
         best_target = max(matches, key=len)
         return best_target
     else:
-        print(f"error: unexpected key '{prefix}'")
+        print(f"error: unexpected {what} '{prefix}'")
         sys.exit(1)
 
 async def main():
@@ -43,9 +53,13 @@ async def main():
         return
 
     for arg in sys.argv[1:]:
-        key, delim, value = re.match(r"([a-z]+)([=+-])([0-9]+)", arg).groups()
-        value = int(value)
-        key = best_match(key, ("brightness", "temperature", "hue", "saturation"))
+        key, delim, value = re.match(r"([a-z]+)([=+-])([a-z0-9]+)", arg).groups()
+        key = best_match(key, ("brightness", "temperature", "hue", "saturation"), "key")
+
+        if key == "hue" and not value.isnumeric():
+            value = HUES[best_match(value, HUES.keys(), "color name")]
+        else:
+            value = int(value)
 
         match delim:
             case "+":
