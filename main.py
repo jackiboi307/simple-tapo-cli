@@ -27,7 +27,7 @@ def best_match(prefix, targets, what):
         best_target = max(matches, key=len)
         return best_target
     else:
-        print(f"error: unexpected {what} '{prefix}'")
+        print("error: unexpected {} '{}'\n(expected: {})".format(what, prefix, ", ".join(targets)))
         sys.exit(1)
 
 async def main():
