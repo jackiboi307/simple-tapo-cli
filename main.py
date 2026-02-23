@@ -9,11 +9,12 @@ from tapo.requests import Color
 HUES = {
     "red": 0,
     "orange": 30,
-    "yellow": 60,
-    "green": 120,
-    "cyan": 180,
-    "blue": 240,
-    "magenta": 270,
+    "yellow": 55,
+    "green": 100,
+    "cyan": 160,
+    "blue": 220,
+    "magenta": 300,
+    "hotpink": 330,
 }
 
 def clamp(min_, max_, value):
